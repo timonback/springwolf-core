@@ -36,6 +36,7 @@ public class AsyncApiConfiguration {
                 .description("Springwolf example project to demonstrate springwolfs abilities")
                 .license(License.builder().name("Apache License 2.0").build())
                 .contact(new Contact("springwolf", "https://github.com/springwolf/springwolf-core", "example@example.com"))
+                .description("Springwolf example project to demonstrate springwolfs abilities")
                 .build();
 
         KafkaProducerData exampleProducerData = KafkaProducerData.kafkaProducerDataBuilder()
