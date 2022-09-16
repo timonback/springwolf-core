@@ -106,6 +106,7 @@ public class RabbitChannelsScannerTest {
                 .build();
 
         Operation operation = Operation.builder()
+                .operationId("test-queue-methodWithAnnotation")
                 .bindings(ImmutableMap.of("amqp", AMQPOperationBinding.builder()
                         .cc(Collections.singletonList(QUEUE))
                         .build()))
@@ -144,6 +145,7 @@ public class RabbitChannelsScannerTest {
                 .build();
 
         Operation operation = Operation.builder()
+                .operationId("test-queue-methodWithAnnotation1")
                 .bindings(ImmutableMap.of("amqp", AMQPOperationBinding.builder()
                         .cc(Collections.singletonList(QUEUE))
                         .build()))
@@ -179,6 +181,7 @@ public class RabbitChannelsScannerTest {
                 .build();
 
         Operation operation = Operation.builder()
+                .operationId("test-queue-methodWithAnnotation1")
                 .bindings(ImmutableMap.of("amqp", AMQPOperationBinding.builder()
                         .cc(Collections.singletonList("key"))
                         .build()))
@@ -214,6 +217,7 @@ public class RabbitChannelsScannerTest {
                 .build();
 
         Operation operation = Operation.builder()
+                .operationId("binding-bean-queue-methodWithAnnotation1")
                 .bindings(ImmutableMap.of("amqp", AMQPOperationBinding.builder()
                         .cc(Collections.singletonList("binding-bean-key"))
                         .build()))
@@ -266,6 +270,7 @@ public class RabbitChannelsScannerTest {
                 .build();
 
         Operation operation = Operation.builder()
+                .operationId("test-queue-methodWithAnnotation")
                 .bindings(ImmutableMap.of("amqp", AMQPOperationBinding.builder()
                         .cc(Collections.singletonList(QUEUE))
                         .build()))

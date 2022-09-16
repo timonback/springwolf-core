@@ -100,6 +100,7 @@ public class ClassLevelKafkaListenerScannerTest extends TestCase {
                 .build();
 
         Operation operation = Operation.builder()
+                .operationId("methodWithAnnotation-consumer")
                 .bindings(ImmutableMap.of("kafka", new KafkaOperationBinding()))
                 .message(message)
                 .build();
@@ -135,6 +136,7 @@ public class ClassLevelKafkaListenerScannerTest extends TestCase {
                 .build();
 
         Operation operation = Operation.builder()
+                .operationId("anotherMethodWithoutAnnotation-consumer")
                 .bindings(ImmutableMap.of("kafka", new KafkaOperationBinding()))
                 .message(ImmutableMap.of(ONE_OF, ImmutableSet.of(fooMessage, barMessage)))
                 .build();
