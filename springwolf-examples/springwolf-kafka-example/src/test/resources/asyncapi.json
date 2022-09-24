@@ -117,7 +117,7 @@
           "bindings": {
             "kafka": {}
           },
-          "operationId": "receiveMonetaryAmount-consumer",
+          "operationId": "receiveMonetaryAmount-subscribe",
           "message": {
             "oneOf": [
               {
