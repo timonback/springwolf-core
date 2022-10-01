@@ -86,7 +86,7 @@ public abstract class AbstractListenerScanner<T extends Annotation> implements C
         Map<String, ? extends ChannelBinding> channelBinding = buildChannelBinding(annotation);
         Map<String, ? extends OperationBinding> operationBinding = buildOperationBinding(annotation);
         Class<?> payload = getPayloadType(method);
-        String operationId = channelName + "-" + method.getName();
+        String operationId = channelName + "-" + method.getName() + "-subscribe";
         ChannelItem channel = buildChannel(channelBinding, payload, operationBinding, operationId);
 
         return Maps.immutableEntry(channelName, channel);
