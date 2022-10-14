@@ -41,7 +41,7 @@
               }
             }
           },
-          "operationId": "another-topic-receiveAnotherPayload-publish",
+          "operationId": "another-topic_publish_receiveAnotherPayload",
           "message": {
             "name": "io.github.stavshamir.springwolf.example.dtos.AnotherPayloadDto",
             "title": "AnotherPayloadDto",
@@ -59,7 +59,7 @@
           "bindings": {
             "kafka": {}
           },
-          "operationId": "example-topic-receiveExamplePayload-publish",
+          "operationId": "example-topic_publish_receiveExamplePayload",
           "message": {
             "name": "io.github.stavshamir.springwolf.example.dtos.ExamplePayloadDto",
             "title": "ExamplePayloadDto",
@@ -77,7 +77,7 @@
           "bindings": {
             "kafka": {}
           },
-          "operationId": "example-producer-topic-subscribe",
+          "operationId": "example-producer-topic_subscribe",
           "message": {
             "oneOf": [
               {
@@ -107,7 +107,7 @@
           "bindings": {
             "kafka": {}
           },
-          "operationId": "example-consumer-topic-publish",
+          "operationId": "example-consumer-topic_publish",
           "message": {
             "name": "io.github.stavshamir.springwolf.example.dtos.ExamplePayloadDto",
             "title": "ExamplePayloadDto",
@@ -126,7 +126,7 @@
           "bindings": {
             "kafka": {}
           },
-          "operationId": "receiveMonetaryAmount-subscribe",
+          "operationId": "receiveMonetaryAmount_subscribe",
           "message": {
             "oneOf": [
               {
