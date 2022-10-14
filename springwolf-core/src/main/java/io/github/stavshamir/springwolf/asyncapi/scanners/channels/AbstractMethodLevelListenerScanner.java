@@ -154,6 +154,7 @@ public abstract class AbstractMethodLevelListenerScanner implements ChannelsScan
                 .build();
 
         Operation operation = Operation.builder()
+                .description("Auto-generated description")
                 .operationId(operationId)
                 .message(message)
                 .bindings(operationBinding)

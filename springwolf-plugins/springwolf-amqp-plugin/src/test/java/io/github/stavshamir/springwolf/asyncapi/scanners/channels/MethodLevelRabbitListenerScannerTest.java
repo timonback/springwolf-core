@@ -106,6 +106,7 @@ public class MethodLevelRabbitListenerScannerTest {
                 .build();
 
         Operation operation = Operation.builder()
+                .description("Auto-generated description")
                 .operationId("test-queue_publish_methodWithAnnotation")
                 .bindings(ImmutableMap.of("amqp", AMQPOperationBinding.builder()
                         .cc(Collections.singletonList(QUEUE))
@@ -145,6 +146,7 @@ public class MethodLevelRabbitListenerScannerTest {
                 .build();
 
         Operation operation = Operation.builder()
+                .description("Auto-generated description")
                 .operationId("test-queue_publish_methodWithAnnotation1")
                 .bindings(ImmutableMap.of("amqp", AMQPOperationBinding.builder()
                         .cc(Collections.singletonList(QUEUE))
@@ -181,6 +183,7 @@ public class MethodLevelRabbitListenerScannerTest {
                 .build();
 
         Operation operation = Operation.builder()
+                .description("Auto-generated description")
                 .operationId("test-queue_publish_methodWithAnnotation1")
                 .bindings(ImmutableMap.of("amqp", AMQPOperationBinding.builder()
                         .cc(Collections.singletonList("key"))
@@ -217,6 +220,7 @@ public class MethodLevelRabbitListenerScannerTest {
                 .build();
 
         Operation operation = Operation.builder()
+                .description("Auto-generated description")
                 .operationId("binding-bean-queue_publish_methodWithAnnotation1")
                 .bindings(ImmutableMap.of("amqp", AMQPOperationBinding.builder()
                         .cc(Collections.singletonList("binding-bean-key"))
@@ -270,6 +274,7 @@ public class MethodLevelRabbitListenerScannerTest {
                 .build();
 
         Operation operation = Operation.builder()
+                .description("Auto-generated description")
                 .operationId("test-queue_publish_methodWithAnnotation")
                 .bindings(ImmutableMap.of("amqp", AMQPOperationBinding.builder()
                         .cc(Collections.singletonList(QUEUE))
