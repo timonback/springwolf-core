@@ -156,6 +156,7 @@ public class ClassLevelKafkaListenerScanner
         String operationId = methods.stream().findFirst().map(it->it.getName() + "_subscribe").orElse("");
 
         Operation operation = Operation.builder()
+                .description("Auto-generated description")
                 .operationId(operationId)
                 .message(getMessageObject(methods))
                 .bindings(operationBinding)

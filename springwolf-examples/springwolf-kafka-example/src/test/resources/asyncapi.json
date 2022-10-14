@@ -41,6 +41,7 @@
               }
             }
           },
+          "description": "Auto-generated description",
           "operationId": "another-topic_publish_receiveAnotherPayload",
           "message": {
             "name": "io.github.stavshamir.springwolf.example.dtos.AnotherPayloadDto",
@@ -59,6 +60,7 @@
           "bindings": {
             "kafka": {}
           },
+          "description": "Auto-generated description",
           "operationId": "example-topic_publish_receiveExamplePayload",
           "message": {
             "name": "io.github.stavshamir.springwolf.example.dtos.ExamplePayloadDto",
@@ -77,6 +79,7 @@
           "bindings": {
             "kafka": {}
           },
+          "description": "Auto-generated description",
           "operationId": "example-producer-topic_subscribe",
           "message": {
             "oneOf": [
@@ -107,6 +110,7 @@
           "bindings": {
             "kafka": {}
           },
+          "description": "Auto-generated description",
           "operationId": "example-consumer-topic_publish",
           "message": {
             "name": "io.github.stavshamir.springwolf.example.dtos.ExamplePayloadDto",
@@ -126,6 +130,7 @@
           "bindings": {
             "kafka": {}
           },
+          "description": "Auto-generated description",
           "operationId": "receiveMonetaryAmount_subscribe",
           "message": {
             "oneOf": [
