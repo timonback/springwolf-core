@@ -101,7 +101,7 @@ public class ClassLevelKafkaListenerScannerTest extends TestCase {
 
         Operation operation = Operation.builder()
                 .description("Auto-generated description")
-                .operationId("methodWithAnnotation_subscribe")
+                .operationId("methodWithAnnotation_publish")
                 .bindings(ImmutableMap.of("kafka", new KafkaOperationBinding()))
                 .message(message)
                 .build();
@@ -138,7 +138,7 @@ public class ClassLevelKafkaListenerScannerTest extends TestCase {
 
         Operation operation = Operation.builder()
                 .description("Auto-generated description")
-                .operationId("anotherMethodWithoutAnnotation_subscribe")
+                .operationId("anotherMethodWithoutAnnotation_publish")
                 .bindings(ImmutableMap.of("kafka", new KafkaOperationBinding()))
                 .message(ImmutableMap.of(ONE_OF, ImmutableSet.of(fooMessage, barMessage)))
                 .build();
