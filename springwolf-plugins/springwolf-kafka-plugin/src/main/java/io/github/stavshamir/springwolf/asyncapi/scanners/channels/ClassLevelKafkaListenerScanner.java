@@ -7,6 +7,7 @@ import com.asyncapi.v2.model.channel.ChannelItem;
 import com.asyncapi.v2.model.channel.operation.Operation;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import io.github.stavshamir.springwolf.asyncapi.scanners.channels.annotation.SpringPayloadAnnotationTypeExtractor;
 import io.github.stavshamir.springwolf.asyncapi.types.channel.operation.message.Message;
 import io.github.stavshamir.springwolf.asyncapi.types.channel.operation.message.PayloadReference;
 import io.github.stavshamir.springwolf.asyncapi.types.channel.operation.message.header.AsyncHeaders;
@@ -102,7 +103,7 @@ public class ClassLevelKafkaListenerScanner
     }
 
     protected Class<?> getPayloadType(Method method) {
-        return KafkaPayloadTypeExtractor.getPayloadType(method);
+        return SpringPayloadAnnotationTypeExtractor.getPayloadType(method);
     }
 
     private Set<Method> getAnnotatedMethods(Class<?> component) {
