@@ -13,10 +13,9 @@
         ]
       }
     },
-    "example": {
+    "examples": [{
       "s": "s value"
-    },
-    "exampleSetFlag": true,
+    }],
     "required": [
       "s"
     ]

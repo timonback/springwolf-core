@@ -34,7 +34,7 @@ class AsyncAnnotationScannerUtilTest {
         assertEquals(headers.getSchemaName(), "TestSchema");
         assertTrue(headers.containsKey("headerResolved"));
         assertEquals(headers.get("headerResolved").getType(), "string");
-        assertEquals(headers.get("headerResolved").getExample(), "valueResolved");
+        assertEquals(headers.get("headerResolved").getExamples(), "valueResolved");
         assertEquals(headers.get("headerResolved").getDescription(), "descriptionResolved");
     }
 

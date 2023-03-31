@@ -1,8 +1,8 @@
 package io.github.stavshamir.springwolf.schemas;
 
+import com.asyncapi.v2.model.schema.Schema;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.v3.oas.models.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.io.IOUtils;
@@ -21,7 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DefaultSchemasServiceTest {
 
-    private final SchemasService schemasService = new DefaultSchemasService(Optional.empty());
+    private final AsyncApiModelConverter modelConverter = new DefaultAsyncApiModelConverter(Optional.empty());
+    private final SchemasService schemasService = new DefaultSchemasService(modelConverter);
 
     private static final String EXAMPLES_PATH = "/schemas/examples";
     private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -44,11 +45,11 @@ public class DefaultSchemasServiceTest {
     public void simpleObject() throws IOException, JSONException {
         String modelName = schemasService.register(SimpleFoo.class);
 
-        assertThat(modelName)
-                .isEqualTo("SimpleFoo");
+        assertThat(modelName).isEqualTo("SimpleFoo");
 
         Schema schema = schemasService.getDefinitions().get(modelName);
-        String example = objectMapper.writeValueAsString(schema.getExample());
+        String example = objectMapper.writeValueAsString(schema.getExamples().stream().findFirst());
+        System.out.println("Got: " + schema);
 
         String expectedExample = jsonResource(EXAMPLES_PATH + "/simple-foo.json");
 
@@ -60,7 +61,8 @@ public class DefaultSchemasServiceTest {
         String modelName = schemasService.register(CompositeFoo.class);
 
         Schema schema = schemasService.getDefinitions().get(modelName);
-        String example = objectMapper.writeValueAsString(schema.getExample());
+        String example = objectMapper.writeValueAsString(schema.getExamples());
+        System.out.println("Got: " + example);
 
         String expectedExample = jsonResource(EXAMPLES_PATH + "/composite-foo.json");
 
