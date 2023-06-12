@@ -26,7 +26,7 @@ ext {
 
     awaitabilityVersion = '4.2.0'
 
-    commonsIoVersion = '2.12.0'
+    commonsIoVersion = '2.13.0'
 
     javaMoneyMonetaVersion = '1.4.2'
 
