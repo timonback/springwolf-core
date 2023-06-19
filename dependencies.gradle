@@ -41,7 +41,7 @@ ext {
     lombokVersion = '1.18.28'
 
     swaggerCoreJakartaVersion = '2.2.11'
-    swaggerModelsJakartaVersion = '2.2.11'
+    swaggerModelsJakartaVersion = '2.2.12'
 
     swaggerAnnotationsVersion = '2.2.11'
     swaggerInflectorVersion = '2.0.9'
