@@ -22,7 +22,9 @@ jobs:
 
       - name: Get date for daily cache
         id: get-date
-        run: echo "name=date::$(/bin/date -u '+%Y%m%d')" >> $GITHUB_OUTPUT
+        run: |
+          DATE=$(/bin/date -u '+%Y%m%d')
+          echo "name=date::$DATE" >> $GITHUB_OUTPUT
         shell: bash
       - name: Cache Dependency Check DB
         uses: actions/cache@v3
