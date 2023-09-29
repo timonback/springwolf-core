@@ -6,6 +6,8 @@ import io.github.stavshamir.springwolf.asyncapi.controller.SpringwolfAmqpControl
 import io.github.stavshamir.springwolf.configuration.properties.SpringwolfAmqpConfigProperties;
 import io.github.stavshamir.springwolf.configuration.properties.SpringwolfConfigProperties;
 import io.github.stavshamir.springwolf.producer.SpringwolfAmqpProducer;
+import io.github.stavshamir.springwolf.schemas.DefaultSchemasService;
+import io.github.stavshamir.springwolf.schemas.example.ExampleJsonGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +29,8 @@ public class SpringwolfAmqpProducerConfigurationIntegrationTest {
     @ExtendWith(SpringExtension.class)
     @ContextConfiguration(
             classes = {
-                DefaultAsyncApiDocketService.class,
+                DefaultSchemasService.class,
+                ExampleJsonGenerator.class,
                 SpringwolfAmqpProducer.class,
                 SpringwolfAmqpController.class,
                 ObjectMapperTestConfiguration.class
@@ -62,7 +65,8 @@ public class SpringwolfAmqpProducerConfigurationIntegrationTest {
     @ExtendWith(SpringExtension.class)
     @ContextConfiguration(
             classes = {
-                DefaultAsyncApiDocketService.class,
+                DefaultSchemasService.class,
+                ExampleJsonGenerator.class,
                 SpringwolfAmqpProducer.class,
                 SpringwolfAmqpController.class,
                 ObjectMapperTestConfiguration.class
