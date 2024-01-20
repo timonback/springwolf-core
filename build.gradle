@@ -9,8 +9,8 @@ plugins {
     id 'ca.cutterslade.analyze' version '1.9.1'
     id 'io.spring.dependency-management' version '1.1.4' apply false
     id 'org.springframework.boot' version '3.2.1' apply false
-    id 'org.owasp.dependencycheck' version '9.0.7'
-    id 'com.diffplug.spotless' version '6.23.3'
+    id 'org.owasp.dependencycheck' version '9.0.9'
+    id 'com.diffplug.spotless' version '6.24.0'
     id 'com.bmuschko.docker-spring-boot-application' version '9.4.0' apply false
 }
 
@@ -44,12 +44,15 @@ allprojects {
         }
 
         mavenCentral()
+
+        maven { url "https://packages.confluent.io/maven/" }
     }
 
     spotless {
         encoding 'UTF-8'
 
         java {
+            targetExclude 'build/**'
             palantirJavaFormat()
 
             licenseHeader("// SPDX-License-Identifier: Apache-2.0", "package|import|public")
@@ -203,6 +206,11 @@ dependencyCheck {
     outputDirectory = "$buildDir/reports/owasp-dependency-check"
     formats = [ReportGenerator.Format.SARIF.toString()]
     nvd.apiKey = project.findProperty("OWASP_API_KEY")
+    analyzers.ossIndex.warnOnlyOnRemoteErrors = true
+    analyzers.assemblyEnabled = false
+    analyzers.nodeEnabled = false
+    analyzers.nodeAudit.enabled = false
+    analyzers.nodeAudit.yarnEnabled = false
 }
 
 def static readEnvFile(path = ".env") {
