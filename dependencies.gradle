@@ -25,9 +25,11 @@
  * The dependencies are sorted alphabetically.
  */
 ext {
-    assertjCoreVersion = '3.25.0'
+    assertjCoreVersion = '3.25.1'
 
     asyncapiCoreVersion = '1.0.0-EAP-2'
+
+    avroVersion = '1.11.3'
 
     awaitilityVersion = '4.2.0'
 
@@ -35,10 +37,15 @@ ext {
 
     jsr305Version = '3.0.2'
 
+    kafkaAvroSerializerVersion = '7.5.1'
+
     kafkaClientsVersion = '3.6.1'
     kafkaStreamsVersion = '3.6.1'
 
+    kafkaProtobufSerializerVersion = '7.5.3'
+
     jacksonVersion = '2.16.1'
+    jacksonDatatypeProtobufVersion = '0.9.14'
     jakartaAnnotationApiVersion = '2.1.1'
 
     jsonSchemaValidator = '1.1.0'
@@ -49,12 +56,14 @@ ext {
     monetaVersion = '1.4.2'
     moneyApiVersion = '1.1'
 
+    protobufJavaVersion = '3.25.2'
+
     junitJupiterVersion = '5.10.1'
     jsonUnitAssertJVersion = '3.2.2'
 
     lombokVersion = '1.18.30'
 
-    slf4jApiVersion = '2.0.10'
+    slf4jApiVersion = '2.0.11'
 
     swaggerVersion = '2.2.20'
 
