@@ -31,6 +31,11 @@ jobs:
       - name: Check formatting (before running tests)
         run: ./gradlew -p ${{ env.project }} spotlessCheck
 
+      - name: Check PR size
+        run: npx @adobe/sizewatcher
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Test
         run: ./gradlew -p ${{ env.project }} npm_run_test
 
