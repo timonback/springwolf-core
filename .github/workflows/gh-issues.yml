@@ -24,7 +24,7 @@ jobs:
   comment_when_staged_for_release_issue_is_closed:
     runs-on: ubuntu-latest
     if: >-
-      !github.event.issue.pull_request &&             # Only run on issues (no pr comments)
+      !github.event.issue.pull_request &&
       github.event.action == 'closed' && 
       github.event.label.name == 'staged for release'
     steps:
