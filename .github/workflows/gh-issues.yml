@@ -1,0 +1,37 @@
+name: Update issue
+
+on:
+  issues:
+
+jobs:
+  comment_when_issue_labeled_staged_for_release:
+    runs-on: ubuntu-latest
+    if: >-
+      !github.event.issue.pull_request &&             # Only run on issues (no pr comments)
+      github.event.action == 'labeled' && 
+      github.event.label.name == 'staged for release'
+    steps:
+      - name: Comment on issue
+        run: |
+          cat << EOF | gh issue comment ${{ github.event.issue.number }} -F -
+          The change has been merged and will be part of the next release.
+
+          If you want to try and verify it in your application,
+          use the current `SNAPSHOT` build as described in our [README.md](https://github.com/springwolf/springwolf-core)
+
+          Thank you for the report/contribution!
+          EOF
+  comment_when_staged_for_release_issue_is_closed:
+    runs-on: ubuntu-latest
+    if: >-
+      !github.event.issue.pull_request &&             # Only run on issues (no pr comments)
+      github.event.action == 'closed' && 
+      github.event.label.name == 'staged for release'
+    steps:
+      - name: Comment on issue
+        run: |
+          cat << EOF | gh issue comment ${{ github.event.issue.number }} -F -
+          The change is available as part of the latest release. 🎉
+
+          Thank you for the report/contribution and making Springwolf better!
+          EOF
