@@ -10,6 +10,8 @@ jobs:
       !github.event.issue.pull_request &&
       github.event.action == 'labeled' && 
       github.event.label.name == 'staged for release'
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Comment on issue
         run: |
@@ -27,6 +29,8 @@ jobs:
       !github.event.issue.pull_request &&
       github.event.action == 'closed' && 
       github.event.label.name == 'staged for release'
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Comment on issue
         run: |
