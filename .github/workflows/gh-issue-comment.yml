@@ -13,6 +13,8 @@ jobs:
       github.event.pull_request.author_association != 'MEMBER'
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_ISSUE_NUMBER: ${{ github.event.issue.number }}
+      GH_REPO: ${{ github.repository }}
     steps:
       - name: Remove label "waiting for feedback"
-        run: gh issue edit ${{ github.event.issue.number }} --remove-label "waiting for feedback"
+        run: gh issue edit ${{ env.GH_ISSUE_NUMBER }} --remove-label "waiting for feedback"

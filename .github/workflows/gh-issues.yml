@@ -12,10 +12,12 @@ jobs:
       github.event.label.name == 'staged for release'
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_ISSUE_NUMBER: ${{ github.event.issue.number }}
+      GH_REPO: ${{ github.repository }}
     steps:
       - name: Comment on issue
         run: |
-          cat << EOF | gh issue comment ${{ github.event.issue.number }} -F -
+          cat << EOF | gh issue comment ${{ env.GH_ISSUE_NUMBER }} -F -
           The change has been merged and will be part of the next release.
 
           If you want to try and verify it in your application,
@@ -31,10 +33,12 @@ jobs:
       github.event.label.name == 'staged for release'
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_ISSUE_NUMBER: ${{ github.event.issue.number }}
+      GH_REPO: ${{ github.repository }}
     steps:
       - name: Comment on issue
         run: |
-          cat << EOF | gh issue comment ${{ github.event.issue.number }} -F -
+          cat << EOF | gh issue comment ${{ env.GH_ISSUE_NUMBER }} -F -
           The change is available as part of the latest release. 🎉
 
           Thank you for the report/contribution and making Springwolf better!
