@@ -7,7 +7,7 @@ jobs:
   comment_when_issue_labeled_staged_for_release:
     runs-on: ubuntu-latest
     if: >-
-      !github.event.issue.pull_request &&             # Only run on issues (no pr comments)
+      !github.event.issue.pull_request &&
       github.event.action == 'labeled' && 
       github.event.label.name == 'staged for release'
     steps:
