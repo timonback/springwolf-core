@@ -18,10 +18,10 @@ jobs:
       - name: Comment on issue
         run: |
           cat << EOF | gh issue comment ${{ env.GH_ISSUE_NUMBER }} -F -
-          The change has been merged and will be part of the next release.
+          The change is staged for release and will be part of the next release.
 
-          If you want to try and verify it in your application,
-          use the latest 1.X.0-SNAPSHOT build as described in our [README.md](https://github.com/springwolf/springwolf-core)
+          If you want to try and verify it in your application today,
+          use the latest 1.X.0-SNAPSHOT build as described in our [README.md > Testing SNAPSHOT version](https://github.com/springwolf/springwolf-core)
 
           Thank you for the report/contribution!
           EOF
@@ -39,7 +39,7 @@ jobs:
       - name: Comment on issue
         run: |
           cat << EOF | gh issue comment ${{ env.GH_ISSUE_NUMBER }} -F -
-          The change is available as part of the latest release. 🎉
+          The change is available in the latest release. 🎉
 
           Thank you for the report/contribution and making Springwolf better!
           EOF
