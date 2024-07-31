@@ -46,6 +46,27 @@
         }
       }
     },
+    "example-bindings-queue_example-topic-routing-key_example-topic-exchange": {
+      "address": "example-bindings-queue_example-topic-routing-key_example-topic-exchange",
+      "messages": {
+        "io.github.springwolf.examples.amqp.dtos.AnotherPayloadDto": {
+          "$ref": "#/components/messages/io.github.springwolf.examples.amqp.dtos.AnotherPayloadDto"
+        }
+      },
+      "bindings": {
+        "amqp": {
+          "is": "routingKey",
+          "exchange": {
+            "name": "example-topic-exchange",
+            "type": "topic",
+            "durable": true,
+            "autoDelete": false,
+            "vhost": "/"
+          },
+          "bindingVersion": "0.3.0"
+        }
+      }
+    },
     "example-queue": {
       "address": "example-queue",
       "messages": {
@@ -75,27 +96,6 @@
         }
       }
     },
-    "example-topic-routing-key": {
-      "address": "example-topic-routing-key",
-      "messages": {
-        "io.github.springwolf.examples.amqp.dtos.AnotherPayloadDto": {
-          "$ref": "#/components/messages/io.github.springwolf.examples.amqp.dtos.AnotherPayloadDto"
-        }
-      },
-      "bindings": {
-        "amqp": {
-          "is": "routingKey",
-          "exchange": {
-            "name": "example-topic-exchange",
-            "type": "topic",
-            "durable": true,
-            "autoDelete": false,
-            "vhost": "/"
-          },
-          "bindingVersion": "0.3.0"
-        }
-      }
-    },
     "multi-payload-queue": {
       "address": "multi-payload-queue",
       "messages": {
@@ -113,6 +113,90 @@
             "name": "multi-payload-queue",
             "durable": true,
             "exclusive": false,
+            "autoDelete": false,
+            "vhost": "/"
+          },
+          "bindingVersion": "0.3.0"
+        }
+      }
+    },
+    "queue-create": {
+      "address": "queue-create",
+      "messages": {
+        "io.github.springwolf.examples.amqp.dtos.GenericPayloadDto": {
+          "$ref": "#/components/messages/io.github.springwolf.examples.amqp.dtos.GenericPayloadDto"
+        }
+      },
+      "bindings": {
+        "amqp": {
+          "is": "queue",
+          "queue": {
+            "name": "queue-create",
+            "durable": true,
+            "exclusive": false,
+            "autoDelete": false,
+            "vhost": "/"
+          },
+          "bindingVersion": "0.3.0"
+        }
+      }
+    },
+    "queue-delete": {
+      "address": "queue-delete",
+      "messages": {
+        "io.github.springwolf.examples.amqp.dtos.GenericPayloadDto": {
+          "$ref": "#/components/messages/io.github.springwolf.examples.amqp.dtos.GenericPayloadDto"
+        }
+      },
+      "bindings": {
+        "amqp": {
+          "is": "queue",
+          "queue": {
+            "name": "queue-delete",
+            "durable": true,
+            "exclusive": false,
+            "autoDelete": false,
+            "vhost": "/"
+          },
+          "bindingVersion": "0.3.0"
+        }
+      }
+    },
+    "queue-read_#_CRUD-topic-exchange-2": {
+      "address": "queue-read_#_CRUD-topic-exchange-2",
+      "messages": {
+        "io.github.springwolf.examples.amqp.dtos.ExamplePayloadDto": {
+          "$ref": "#/components/messages/io.github.springwolf.examples.amqp.dtos.ExamplePayloadDto"
+        }
+      },
+      "bindings": {
+        "amqp": {
+          "is": "routingKey",
+          "exchange": {
+            "name": "CRUD-topic-exchange-2",
+            "type": "topic",
+            "durable": true,
+            "autoDelete": false,
+            "vhost": "/"
+          },
+          "bindingVersion": "0.3.0"
+        }
+      }
+    },
+    "queue-update_#_CRUD-topic-exchange-1": {
+      "address": "queue-update_#_CRUD-topic-exchange-1",
+      "messages": {
+        "io.github.springwolf.examples.amqp.dtos.GenericPayloadDto": {
+          "$ref": "#/components/messages/io.github.springwolf.examples.amqp.dtos.GenericPayloadDto"
+        }
+      },
+      "bindings": {
+        "amqp": {
+          "is": "routingKey",
+          "exchange": {
+            "name": "CRUD-topic-exchange-1",
+            "type": "topic",
+            "durable": true,
             "autoDelete": false,
             "vhost": "/"
           },
@@ -212,6 +296,25 @@
           "someEnum",
           "someString"
         ]
+      },
+      "io.github.springwolf.examples.amqp.dtos.GenericPayloadDto": {
+        "title": "GenericPayloadDto",
+        "type": "object",
+        "properties": {
+          "genericValue": {
+            "type": "object",
+            "description": "Generic Payload field"
+          }
+        },
+        "description": "Generic payload model",
+        "examples": [
+          {
+            "genericValue": { }
+          }
+        ],
+        "required": [
+          "genericValue"
+        ]
       }
     },
     "messages": {
@@ -251,6 +354,24 @@
             "bindingVersion": "0.3.0"
           }
         }
+      },
+      "io.github.springwolf.examples.amqp.dtos.GenericPayloadDto": {
+        "headers": {
+          "$ref": "#/components/schemas/SpringRabbitListenerDefaultHeaders"
+        },
+        "payload": {
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schema": {
+            "$ref": "#/components/schemas/io.github.springwolf.examples.amqp.dtos.GenericPayloadDto"
+          }
+        },
+        "name": "io.github.springwolf.examples.amqp.dtos.GenericPayloadDto",
+        "title": "GenericPayloadDto",
+        "bindings": {
+          "amqp": {
+            "bindingVersion": "0.3.0"
+          }
+        }
       }
     }
   },
@@ -272,6 +393,26 @@
       "messages": [
         {
           "$ref": "#/channels/another-queue/messages/io.github.springwolf.examples.amqp.dtos.AnotherPayloadDto"
+        }
+      ]
+    },
+    "example-bindings-queue_example-topic-routing-key_example-topic-exchange_receive_bindingsExample": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/example-bindings-queue_example-topic-routing-key_example-topic-exchange"
+      },
+      "bindings": {
+        "amqp": {
+          "expiration": 0,
+          "cc": [
+            "example-topic-routing-key"
+          ],
+          "bindingVersion": "0.3.0"
+        }
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/example-bindings-queue_example-topic-routing-key_example-topic-exchange/messages/io.github.springwolf.examples.amqp.dtos.AnotherPayloadDto"
         }
       ]
     },
@@ -320,26 +461,6 @@
         }
       ]
     },
-    "example-topic-routing-key_receive_bindingsExample": {
-      "action": "receive",
-      "channel": {
-        "$ref": "#/channels/example-topic-routing-key"
-      },
-      "bindings": {
-        "amqp": {
-          "expiration": 0,
-          "cc": [
-            "example-topic-routing-key"
-          ],
-          "bindingVersion": "0.3.0"
-        }
-      },
-      "messages": [
-        {
-          "$ref": "#/channels/example-topic-routing-key/messages/io.github.springwolf.examples.amqp.dtos.AnotherPayloadDto"
-        }
-      ]
-    },
     "multi-payload-queue_receive_bindingsBeanExample": {
       "action": "receive",
       "channel": {
@@ -360,6 +481,86 @@
         },
         {
           "$ref": "#/channels/multi-payload-queue/messages/io.github.springwolf.examples.amqp.dtos.ExamplePayloadDto"
+        }
+      ]
+    },
+    "queue-create_receive_queuesToDeclareCreate": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/queue-create"
+      },
+      "bindings": {
+        "amqp": {
+          "expiration": 0,
+          "cc": [
+            "queue-create"
+          ],
+          "bindingVersion": "0.3.0"
+        }
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/queue-create/messages/io.github.springwolf.examples.amqp.dtos.GenericPayloadDto"
+        }
+      ]
+    },
+    "queue-delete_receive_queuesToDeclareDelete": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/queue-delete"
+      },
+      "bindings": {
+        "amqp": {
+          "expiration": 0,
+          "cc": [
+            "queue-delete"
+          ],
+          "bindingVersion": "0.3.0"
+        }
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/queue-delete/messages/io.github.springwolf.examples.amqp.dtos.GenericPayloadDto"
+        }
+      ]
+    },
+    "queue-read_#_CRUD-topic-exchange-2_receive_bindingsRead": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/queue-read_#_CRUD-topic-exchange-2"
+      },
+      "bindings": {
+        "amqp": {
+          "expiration": 0,
+          "cc": [
+            "#"
+          ],
+          "bindingVersion": "0.3.0"
+        }
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/queue-read_#_CRUD-topic-exchange-2/messages/io.github.springwolf.examples.amqp.dtos.ExamplePayloadDto"
+        }
+      ]
+    },
+    "queue-update_#_CRUD-topic-exchange-1_receive_bindingsUpdate": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/queue-update_#_CRUD-topic-exchange-1"
+      },
+      "bindings": {
+        "amqp": {
+          "expiration": 0,
+          "cc": [
+            "#"
+          ],
+          "bindingVersion": "0.3.0"
+        }
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/queue-update_#_CRUD-topic-exchange-1/messages/io.github.springwolf.examples.amqp.dtos.GenericPayloadDto"
         }
       ]
     }

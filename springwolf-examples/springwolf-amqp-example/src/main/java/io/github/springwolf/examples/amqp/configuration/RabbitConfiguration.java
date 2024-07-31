@@ -2,6 +2,7 @@
 package io.github.springwolf.examples.amqp.configuration;
 
 import io.github.springwolf.examples.amqp.AmqpConstants;
+import io.github.springwolf.examples.amqp.dtos.AnotherPayloadDto;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Exchange;
@@ -33,11 +34,6 @@ public class RabbitConfiguration {
     }
 
     @Bean
-    public Queue exampleBindingsQueue() {
-        return new Queue(AmqpConstants.QUEUE_EXAMPLE_BINDINGS_QUEUE, false, true, true);
-    }
-
-    @Bean
     public Queue queueRead() {
         return new Queue(AmqpConstants.QUEUE_READ, false);
     }
@@ -52,7 +48,18 @@ public class RabbitConfiguration {
         return new Queue(AmqpConstants.QUEUE_MULTI_PAYLOAD_QUEUE);
     }
 
-    @Bean
+    /**
+     * Defined by @RabbitListener annotation in {@link io.github.springwolf.examples.amqp.consumers.ExampleConsumer#bindingsExample(AnotherPayloadDto)}
+     */
+    // @Bean
+    public Queue exampleBindingsQueue() {
+        return new Queue(AmqpConstants.QUEUE_EXAMPLE_BINDINGS_QUEUE, false, true, true);
+    }
+
+    /**
+     * Defined by @RabbitListener annotation in {@link io.github.springwolf.examples.amqp.consumers.ExampleConsumer#bindingsExample(AnotherPayloadDto)}
+     */
+    // @Bean
     public Binding exampleTopicBinding(Queue exampleBindingsQueue, Exchange exampleTopicExchange) {
         return BindingBuilder.bind(exampleBindingsQueue)
                 .to(exampleTopicExchange)
