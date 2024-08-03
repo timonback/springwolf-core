@@ -11,6 +11,8 @@ import io.github.springwolf.asyncapi.v3.bindings.amqp.AMQPChannelQueueProperties
 import io.github.springwolf.asyncapi.v3.bindings.amqp.AMQPChannelType;
 import io.github.springwolf.asyncapi.v3.bindings.amqp.AMQPMessageBinding;
 import io.github.springwolf.asyncapi.v3.bindings.amqp.AMQPOperationBinding;
+import io.github.springwolf.asyncapi.v3.model.ReferenceUtil;
+import io.github.springwolf.asyncapi.v3.model.channel.ChannelObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.Exchange;
@@ -47,6 +49,7 @@ import java.util.stream.Stream;
 // TODO: should this do validation and throw errors when an invalid rabbit configuration is found?
 @Slf4j
 public class RabbitListenerUtil {
+    public static final String BINDING_NAME = "amqp";
     private static final Boolean DEFAULT_AUTO_DELETE = false;
     private static final Boolean DEFAULT_DURABLE = true;
     private static final Boolean DEFAULT_EXCLUSIVE = false;
@@ -126,7 +129,7 @@ public class RabbitListenerUtil {
             channelBinding.exchange(buildExchangeProperties(annotation, exchangeName, context));
         }
 
-        return Map.of("amqp", channelBinding.build());
+        return Map.of(BINDING_NAME, channelBinding.build());
     }
 
     private static AMQPChannelExchangeProperties buildExchangeProperties(
@@ -191,6 +194,24 @@ public class RabbitListenerUtil {
                 .build();
     }
 
+    public static ChannelObject buildChannelObject(org.springframework.amqp.core.Queue queue) {
+        return ChannelObject.builder()
+                .channelId(ReferenceUtil.toValidId(queue.getName()))
+                .address(queue.getName())
+                .bindings(Map.of(
+                        BINDING_NAME,
+                        AMQPChannelBinding.builder()
+                                .is(AMQPChannelType.QUEUE)
+                                .queue(AMQPChannelQueueProperties.builder()
+                                        .name(queue.getName())
+                                        .autoDelete(queue.isAutoDelete())
+                                        .durable(queue.isDurable())
+                                        .exclusive(queue.isExclusive())
+                                        .build())
+                                .build()))
+                .build();
+    }
+
     private static Boolean parse(String value, Boolean defaultIfEmpty) {
         if ("".equals(value)) {
             return defaultIfEmpty;
@@ -223,7 +244,7 @@ public class RabbitListenerUtil {
     public static Map<String, OperationBinding> buildOperationBinding(
             RabbitListener annotation, StringValueResolver resolver, RabbitListenerUtilContext context) {
         return Map.of(
-                "amqp",
+                BINDING_NAME,
                 AMQPOperationBinding.builder()
                         // TODO: cc for publishing does not match listener -> remove?
                         .cc(getRoutingKeys(annotation, resolver, context))
@@ -264,6 +285,6 @@ public class RabbitListenerUtil {
 
     public static Map<String, MessageBinding> buildMessageBinding() {
         // currently the feature to define amqp message binding is not implemented.
-        return Map.of("amqp", new AMQPMessageBinding());
+        return Map.of(BINDING_NAME, new AMQPMessageBinding());
     }
 }
