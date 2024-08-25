@@ -189,7 +189,7 @@ components:
             - 2023-10-28 20:01:23+00:00
         ce_type:
           type: string
-          description: CloudEvent Payload Type Header
+          description: CloudEvent type. Other fields are set through SpringwolfCloudEventCustomizer
           enum:
             - NestedPayloadDto.v1
           examples:
@@ -204,12 +204,12 @@ components:
       description: Spring __TypeId__ and CloudEvent Headers
       examples:
         - __TypeId__: io.github.springwolf.examples.kafka.dtos.NestedPayloadDto
+          ce_type: NestedPayloadDto.v1
           ce_id: 2c60089e-6f39-459d-8ced-2d6df7e4c03a
           ce_source: http://localhost
           ce_specversion: "1.0"
           ce_subject: Springwolf example project - Kafka
           ce_time: 2023-10-28 20:01:23+00:00
-          ce_type: NestedPayloadDto.v1
           content-type: application/json
       x-json-schema:
         $schema: https://json-schema.org/draft-04/schema#
@@ -246,7 +246,7 @@ components:
               - 2023-10-28 20:01:23+00:00
             type: string
           ce_type:
-            description: CloudEvent Payload Type Header
+            description: CloudEvent type. Other fields are set through SpringwolfCloudEventCustomizer
             enum:
               - NestedPayloadDto.v1
             type: string
