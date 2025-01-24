@@ -182,7 +182,7 @@ public class SpringwolfAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public ExampleXmlValueSerializer defaultExampleXmlValueSerializer() {
+    public ExampleXmlValueSerializer exampleXmlValueSerializer() {
         return new DefaultExampleXmlValueSerializer();
     }
 
@@ -193,7 +193,7 @@ public class SpringwolfAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public ExampleYamlValueSerializer defaultExampleYamlValueSerializer() {
+    public ExampleYamlValueSerializer exampleYamlValueSerializer() {
         return new DefaultExampleYamlValueSerializer();
     }
 
