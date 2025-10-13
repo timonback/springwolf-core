@@ -35,7 +35,7 @@
     "@asyncapi/parser": "^3.4.0",
     "@testing-library/angular": "^18.1.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^22.0.0",
+    "@types/node": "^24.7.2",
     "angular-in-memory-web-api": "^0.20.0",
     "esbuild": "^0.25.10",
     "jest": "^30.2.0",
