@@ -26,7 +26,6 @@ public class SpringwolfConfigPropertiesIntegrationTest {
             properties = {
                 "springwolf.enabled=true",
                 "springwolf.docket.info.title=Info title was loaded from spring properties",
-                "springwolf.docket.info.version=1.0.0",
                 "springwolf.docket.info.extension-fields.x-api-name=api-name",
                 "springwolf.docket.base-package=io.github.springwolf.core.example",
                 "springwolf.docket.servers.test-protocol.protocol=test",
@@ -66,25 +65,6 @@ public class SpringwolfConfigPropertiesIntegrationTest {
                                     .host("some-server:1234")
                                     .build()));
         }
-    }
-
-    @Nested
-    @ExtendWith(SpringExtension.class)
-    @EnableConfigurationProperties(SpringwolfConfigProperties.class)
-    @TestPropertySource(
-            properties = {
-                "springwolf.enabled=true",
-                "springwolf.docket.info.title=Info title was loaded from spring properties",
-                "springwolf.docket.info.version=1.0.0",
-                "springwolf.docket.info.extension-fields.x-api-name=api-name",
-                "springwolf.docket.base-package=io.github.springwolf.core.example",
-                "springwolf.docket.servers.test-protocol.protocol=test",
-                "springwolf.docket.servers.test-protocol.host=some-server:1234",
-            })
-    class PayloadWithoutCustomizingIntegrationTest {
-
-        @Autowired
-        private SpringwolfConfigProperties properties;
 
         @Test
         void payloadTest() {
@@ -104,16 +84,7 @@ public class SpringwolfConfigPropertiesIntegrationTest {
     @ExtendWith(SpringExtension.class)
     @EnableConfigurationProperties(SpringwolfConfigProperties.class)
     @TestPropertySource(
-            properties = {
-                "springwolf.enabled=true",
-                "springwolf.docket.info.title=Info title was loaded from spring properties",
-                "springwolf.docket.info.version=1.0.0",
-                "springwolf.docket.info.extension-fields.x-api-name=api-name",
-                "springwolf.docket.base-package=io.github.springwolf.core.example",
-                "springwolf.docket.servers.test-protocol.protocol=test",
-                "springwolf.docket.servers.test-protocol.host=some-server:1234",
-                "springwolf.payload.extractable-classes.my.custom.class=1"
-            })
+            properties = {"springwolf.enabled=true", "springwolf.payload.extractable-classes.my.custom.class=1"})
     class PayloadWithCustomizingIntegrationTest {
 
         @Autowired
@@ -140,16 +111,7 @@ public class SpringwolfConfigPropertiesIntegrationTest {
     @ExtendWith(SpringExtension.class)
     @EnableConfigurationProperties(SpringwolfConfigProperties.class)
     @TestPropertySource(
-            properties = {
-                "springwolf.enabled=true",
-                "springwolf.docket.info.title=Info title was loaded from spring properties",
-                "springwolf.docket.info.version=1.0.0",
-                "springwolf.docket.info.extension-fields.x-api-name=api-name",
-                "springwolf.docket.base-package=io.github.springwolf.core.example",
-                "springwolf.docket.servers.test-protocol.protocol=test",
-                "springwolf.docket.servers.test-protocol.host=some-server:1234",
-                "springwolf.payload.extractable-classes.java.util.List=-1"
-            })
+            properties = {"springwolf.enabled=true", "springwolf.payload.extractable-classes.java.util.List=-1"})
     class PayloadDisabledIntegrationTest {
 
         @Autowired
