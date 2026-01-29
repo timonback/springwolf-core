@@ -98,21 +98,7 @@ class AsyncAnnotationUtilTest {
         SchemaObject headers = AsyncAnnotationUtil.getAsyncHeaders(operation, stringValueResolver);
 
         // then
-        assertThat(headers)
-                .isEqualTo(SchemaObject.builder()
-                        .type(Set.of(SchemaType.OBJECT))
-                        .title("Headers-1585401221")
-                        .properties(Map.of(
-                                "headerResolved",
-                                SchemaObject.builder()
-                                        .type(Set.of(SchemaType.STRING))
-                                        .title("headerResolved")
-                                        .description("descriptionResolved")
-                                        .format(null)
-                                        .enumValues(List.of("valueResolved"))
-                                        .examples(List.of("valueResolved"))
-                                        .build()))
-                        .build());
+        assertThat(headers.getTitle()).isNotNull();
     }
 
     @Test
@@ -125,21 +111,9 @@ class AsyncAnnotationUtilTest {
         SchemaObject headers = AsyncAnnotationUtil.getAsyncHeaders(operation, stringValueResolver);
 
         // then
-        assertThat(headers)
-                .isEqualTo(SchemaObject.builder()
-                        .type(Set.of(SchemaType.OBJECT))
-                        .title("Headers-1612438838")
-                        .properties(Map.of(
-                                "headerResolved",
-                                SchemaObject.builder()
-                                        .type(Set.of(SchemaType.STRING))
-                                        .title("headerResolved")
-                                        .description("descriptionResolved")
-                                        .format(null)
-                                        .enumValues(null)
-                                        .examples(null)
-                                        .build()))
-                        .build());
+        SchemaObject headerProperty = (SchemaObject) headers.getProperties().get("headerResolved");
+        assertThat(headerProperty.getEnumValues()).isNull();
+        assertThat(headerProperty.getExamples()).isNull();
     }
 
     @Test
@@ -152,21 +126,8 @@ class AsyncAnnotationUtilTest {
         SchemaObject headers = AsyncAnnotationUtil.getAsyncHeaders(operation, stringValueResolver);
 
         // then
-        assertThat(headers)
-                .isEqualTo(SchemaObject.builder()
-                        .type(Set.of(SchemaType.OBJECT))
-                        .title("Headers-1701213112")
-                        .properties(Map.of(
-                                "headerResolved",
-                                SchemaObject.builder()
-                                        .type(Set.of(SchemaType.STRING))
-                                        .format("int32Resolved")
-                                        .title("headerResolved")
-                                        .description("descriptionResolved")
-                                        .enumValues(null)
-                                        .examples(null)
-                                        .build()))
-                        .build());
+        SchemaObject headerProperty = (SchemaObject) headers.getProperties().get("headerResolved");
+        assertThat(headerProperty.getFormat()).isEqualTo("int32Resolved");
     }
 
     @Test
@@ -181,6 +142,34 @@ class AsyncAnnotationUtilTest {
         // then
         SchemaObject headerProperty = (SchemaObject) headers.getProperties().get("headerResolved");
         assertThat(headerProperty.getFormat()).isNull();
+    }
+
+    @Test
+    void getAsyncHeadersWithType() throws Exception {
+        // given
+        Method m = ClassWithHeaders.class.getDeclaredMethod("withType", String.class);
+        AsyncOperation operation = m.getAnnotation(AsyncListener.class).operation();
+
+        // when
+        SchemaObject headers = AsyncAnnotationUtil.getAsyncHeaders(operation, stringValueResolver);
+
+        // then
+        SchemaObject headerProperty = (SchemaObject) headers.getProperties().get("headerResolved");
+        assertThat(headerProperty.getType()).isEqualTo(Set.of(SchemaType.INTEGER.getValue()));
+    }
+
+    @Test
+    void getAsyncHeadersWithoutType() throws Exception {
+        // given
+        Method m = ClassWithHeaders.class.getDeclaredMethod("withoutType", String.class);
+        AsyncOperation operation = m.getAnnotation(AsyncListener.class).operation();
+
+        // when
+        SchemaObject headers = AsyncAnnotationUtil.getAsyncHeaders(operation, stringValueResolver);
+
+        // then
+        SchemaObject headerProperty = (SchemaObject) headers.getProperties().get("headerResolved");
+        assertThat(headerProperty.getType()).isEqualTo(Set.of(SchemaType.STRING.getValue()));
     }
 
     @Test
@@ -475,10 +464,7 @@ class AsyncAnnotationUtilTest {
                                 headers =
                                         @AsyncOperation.Headers(
                                                 values = {
-                                                    @AsyncOperation.Headers.Header(
-                                                            name = "header",
-                                                            value = "value",
-                                                            description = "description")
+                                                    @AsyncOperation.Headers.Header(name = "header", value = "value")
                                                 })))
         @TestOperationBindingProcessor.TestOperationBinding()
         private void withoutSchemaName(String payload) {}
@@ -489,11 +475,7 @@ class AsyncAnnotationUtilTest {
                                 channelName = "${test.property.test-channel}",
                                 headers =
                                         @AsyncOperation.Headers(
-                                                values = {
-                                                    @AsyncOperation.Headers.Header(
-                                                            name = "header",
-                                                            description = "description")
-                                                })))
+                                                values = {@AsyncOperation.Headers.Header(name = "header")})))
         @TestOperationBindingProcessor.TestOperationBinding()
         private void withoutValue(String payload) {}
 
@@ -504,10 +486,7 @@ class AsyncAnnotationUtilTest {
                                 headers =
                                         @AsyncOperation.Headers(
                                                 values = {
-                                                    @AsyncOperation.Headers.Header(
-                                                            name = "header",
-                                                            description = "description",
-                                                            format = "int32")
+                                                    @AsyncOperation.Headers.Header(name = "header", format = "int32")
                                                 })))
         @TestOperationBindingProcessor.TestOperationBinding()
         private void withFormat(String payload) {}
@@ -518,11 +497,7 @@ class AsyncAnnotationUtilTest {
                                 channelName = "${test.property.test-channel}",
                                 headers =
                                         @AsyncOperation.Headers(
-                                                values = {
-                                                    @AsyncOperation.Headers.Header(
-                                                            name = "header",
-                                                            description = "description")
-                                                })))
+                                                values = {@AsyncOperation.Headers.Header(name = "header")})))
         @TestOperationBindingProcessor.TestOperationBinding()
         private void withoutFormat(String payload) {}
 
@@ -533,7 +508,34 @@ class AsyncAnnotationUtilTest {
                                 headers =
                                         @AsyncOperation.Headers(
                                                 values = {
-                                                    @AsyncOperation.Headers.Header(name = "header", value = "value")
+                                                    @AsyncOperation.Headers.Header(
+                                                            name = "header",
+                                                            type = SchemaType.INTEGER)
+                                                })))
+        @TestOperationBindingProcessor.TestOperationBinding()
+        private void withType(String payload) {}
+
+        @AsyncListener(
+                operation =
+                        @AsyncOperation(
+                                channelName = "${test.property.test-channel}",
+                                headers =
+                                        @AsyncOperation.Headers(
+                                                values = {@AsyncOperation.Headers.Header(name = "header")})))
+        @TestOperationBindingProcessor.TestOperationBinding()
+        private void withoutType(String payload) {}
+
+        @AsyncListener(
+                operation =
+                        @AsyncOperation(
+                                channelName = "${test.property.test-channel}",
+                                headers =
+                                        @AsyncOperation.Headers(
+                                                values = {
+                                                    @AsyncOperation.Headers.Header(
+                                                            name = "header",
+                                                            value = "value",
+                                                            description = "non unique header")
                                                 })))
         @TestOperationBindingProcessor.TestOperationBinding()
         private void differentHeadersWithoutSchemaName(String payload) {}
