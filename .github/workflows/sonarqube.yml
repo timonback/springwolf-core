@@ -42,4 +42,4 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build jacocoTestReport sonar -x ":springwolf-examples:e2e:test"
+        run: ./gradlew build jacocoTestReport sonar -x ":springwolf-examples:test"
