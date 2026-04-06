@@ -1,5 +1,5 @@
 {
-  "asyncapi": "3.0.0",
+  "asyncapi": "3.1.0",
   "info": {
     "title": "Springwolf example project - Kafka",
     "version": "1.0.0",
@@ -259,7 +259,7 @@
             "ce_source": "http://localhost",
             "ce_specversion": "1.0",
             "ce_subject": "Springwolf example project - Kafka",
-            "ce_time": "2023-10-28 20:01:23+00:00",
+            "ce_time": "2023-10-28T20:01:23+00:00",
             "ce_type": "NestedPayloadDto.v1",
             "content-type": "application/json"
           },
@@ -321,12 +321,13 @@
             },
             "ce_time": {
               "type": "string",
+              "format": "date-time",
               "description": "CloudEvent Time Header",
               "enum": [
-                "2023-10-28 20:01:23+00:00"
+                "2023-10-28T20:01:23+00:00"
               ],
               "examples": [
-                "2023-10-28 20:01:23+00:00"
+                "2023-10-28T20:01:23+00:00"
               ],
               "title": "ce_time"
             },
@@ -408,7 +409,7 @@
           "type": "object",
           "example": {
             "__TypeId__": "string",
-            "my_uuid_field": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            "my_uuid_field": "00000000-0000-0000-0000-000000000000"
           },
           "properties": {
             "__TypeId__": {
@@ -420,6 +421,14 @@
               "type": "string",
               "format": "uuid",
               "description": "Event identifier",
+              "enum": [
+                "00000000-0000-0000-0000-000000000000",
+                "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"
+              ],
+              "examples": [
+                "00000000-0000-0000-0000-000000000000",
+                "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"
+              ],
               "title": "my_uuid_field"
             }
           },
@@ -701,7 +710,8 @@
                 "FOO1",
                 "FOO2",
                 "FOO3"
-              ]
+              ],
+              "title": "ExampleEnum"
             }
           },
           "title": "AnotherPayloadAvroDto"
@@ -742,7 +752,8 @@
                 "FOO2",
                 "FOO3",
                 "UNRECOGNIZED"
-              ]
+              ],
+              "title": "ExampleEnum"
             },
             "someLong": {
               "type": "integer",
@@ -802,7 +813,8 @@
                 "FOO2",
                 "FOO3"
               ],
-              "example": "FOO2"
+              "example": "FOO2",
+              "title": "ExampleEnum"
             },
             "someLong": {
               "type": "integer",
@@ -845,7 +857,8 @@
               "type": "array",
               "items": {
                 "$ref": "#/components/schemas/io.github.springwolf.examples.kafka.dtos.ExamplePayloadDto"
-              }
+              },
+              "title": "List"
             },
             "someStrings": {
               "type": "array",
@@ -854,6 +867,7 @@
                 "description": "Some string field",
                 "example": "some string value"
               },
+              "title": "Set",
               "uniqueItems": true
             }
           },
@@ -878,7 +892,8 @@
               "enum": [
                 "COMPLEX1",
                 "COMPLEX2"
-              ]
+              ],
+              "title": "ComplexEnum"
             },
             "notRequiredField": {
               "type": "string",
@@ -923,7 +938,8 @@
                 "FOO1",
                 "FOO2",
                 "FOO3"
-              ]
+              ],
+              "title": "ExampleEnum"
             },
             "someLong": {
               "type": "integer",
@@ -948,7 +964,8 @@
                 "FOO1",
                 "FOO2",
                 "FOO3"
-              ]
+              ],
+              "title": "ExampleEnum"
             },
             "someLong": {
               "type": "integer",
@@ -1061,7 +1078,8 @@
             "powerSource": "string",
             "topSpeed": 0,
             "vehicleType": "string"
-          }
+          },
+          "title": "VehicleElectricPayloadDto"
         }
       },
       "io.github.springwolf.examples.kafka.dtos.discriminator.VehicleGasolinePayloadDto": {
@@ -1091,7 +1109,8 @@
             "powerSource": "string",
             "topSpeed": 0,
             "vehicleType": "string"
-          }
+          },
+          "title": "VehicleGasolinePayloadDto"
         }
       },
       "java.lang.Integer": {
@@ -1136,7 +1155,7 @@
           "$ref": "#/components/schemas/SpringKafkaDefaultHeaders-PayloadNotUsed"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "title": "PayloadNotUsed",
             "type": "object",
@@ -1157,7 +1176,7 @@
           "$ref": "#/components/schemas/HeadersNotUsed"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "$ref": "#/components/schemas/io.github.springwolf.examples.kafka.consumers.StringConsumer.StringEnvelope"
           }
@@ -1175,7 +1194,7 @@
           "$ref": "#/components/schemas/HeadersNotDocumented"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "$ref": "#/components/schemas/io.github.springwolf.examples.kafka.dto.avro.AnotherPayloadAvroDto"
           }
@@ -1194,7 +1213,7 @@
           "$ref": "#/components/schemas/SpringKafkaDefaultHeaders-Message"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "$ref": "#/components/schemas/io.github.springwolf.examples.kafka.dto.proto.ExamplePayloadProtobufDto.Message"
           }
@@ -1212,7 +1231,7 @@
           "$ref": "#/components/schemas/SpringKafkaDefaultHeaders-AnotherTopic"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "$ref": "#/components/schemas/io.github.springwolf.examples.kafka.dtos.AnotherPayloadDto"
           }
@@ -1230,7 +1249,7 @@
           "$ref": "#/components/schemas/SpringKafkaDefaultHeaders-ExamplePayloadDto-1610003719"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "$ref": "#/components/schemas/io.github.springwolf.examples.kafka.dtos.ExamplePayloadDto"
           }
@@ -1248,7 +1267,7 @@
           "$ref": "#/components/schemas/SpringDefaultHeaderAndCloudEvent"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "$ref": "#/components/schemas/io.github.springwolf.examples.kafka.dtos.NestedPayloadDto"
           }
@@ -1273,7 +1292,7 @@
           "$ref": "#/components/schemas/SpringKafkaDefaultHeaders-RequiredAndNullablePayloadDto"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "$ref": "#/components/schemas/io.github.springwolf.examples.kafka.dtos.RequiredAndNullablePayloadDto"
           }
@@ -1291,7 +1310,7 @@
           "$ref": "#/components/schemas/HeadersNotDocumented"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "$ref": "#/components/schemas/io.github.springwolf.examples.kafka.dtos.XmlPayloadDto"
           }
@@ -1311,7 +1330,7 @@
           "$ref": "#/components/schemas/HeadersNotDocumented"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "$ref": "#/components/schemas/io.github.springwolf.examples.kafka.dtos.YamlPayloadDto"
           }
@@ -1331,7 +1350,7 @@
           "$ref": "#/components/schemas/SpringKafkaDefaultHeaders-VehicleBase"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "$ref": "#/components/schemas/io.github.springwolf.examples.kafka.dtos.discriminator.VehicleBase"
           }
@@ -1349,7 +1368,7 @@
           "$ref": "#/components/schemas/SpringKafkaDefaultHeaders-integer"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "schemaFormat": "application/vnd.oai.openapi;version=3.1.0",
             "schema": {
@@ -1372,7 +1391,7 @@
           "$ref": "#/components/schemas/SpringKafkaDefaultHeaders-string"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "schemaFormat": "application/vnd.oai.openapi;version=3.1.0",
             "schema": {
@@ -1394,7 +1413,7 @@
           "$ref": "#/components/schemas/SpringKafkaDefaultHeaders-MonetaryAmount"
         },
         "payload": {
-          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.0.0",
+          "schemaFormat": "application/vnd.aai.asyncapi+json;version=3.1.0",
           "schema": {
             "$ref": "#/components/schemas/javax.money.MonetaryAmount"
           }

@@ -12,7 +12,13 @@ import java.lang.annotation.Target;
 @Target({})
 @Inherited
 public @interface AsyncOperation {
-    String channelName();
+    /**
+     * The name of the channel.
+     * <p>
+     * If not set, Springwolf will attempt to infer the channel name from the broker-specific listener annotation
+     * on the same method (e.g. {@code @RabbitListener(queues = "my-queue")} → channel name {@code my-queue}).
+     */
+    String channelName() default "";
 
     String description() default "";
 
@@ -56,7 +62,7 @@ public @interface AsyncOperation {
 
             String description() default "";
 
-            String value() default "";
+            String[] value() default "";
 
             /**
              * The schema type of the header value according to AsyncAPI specification.
@@ -74,7 +80,7 @@ public @interface AsyncOperation {
              *   <li>"date-time" - RFC 3339 date-time</li>
              * </ul>
              *
-             * @see <a href="https://www.asyncapi.com/docs/reference/specification/v3.0.0#dataTypeFormat">AsyncAPI Data Type Format</a>
+             * @see <a href="https://www.asyncapi.com/docs/reference/specification/v3.1.0#dataTypeFormat">AsyncAPI Data Type Format</a>
              * @return the format string, empty by default
              */
             String format() default "";

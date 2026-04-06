@@ -16,6 +16,7 @@ import io.github.springwolf.core.asyncapi.scanners.bindings.channels.ChannelBind
 import io.github.springwolf.core.asyncapi.scanners.bindings.channels.ProcessedChannelBinding;
 import io.github.springwolf.core.asyncapi.scanners.common.AsyncAnnotationProvider;
 import io.github.springwolf.core.asyncapi.scanners.common.annotation.MethodAndAnnotation;
+import io.github.springwolf.core.asyncapi.scanners.common.channel.inferrer.ChannelNameResolver;
 import io.github.springwolf.core.asyncapi.scanners.common.message.AsyncAnnotationMessageService;
 import io.github.springwolf.core.asyncapi.scanners.common.operation.AsyncAnnotationOperationService;
 import io.github.springwolf.core.configuration.docket.AsyncApiDocket;
@@ -60,6 +61,7 @@ class AsyncAnnotationChannelServiceTest {
             return OperationAction.SEND;
         }
     };
+
     private final AsyncAnnotationMessageService asyncAnnotationMessageService =
             mock(AsyncAnnotationMessageService.class);
     private final AsyncAnnotationOperationService<TestListener> asyncAnnotationOperationService =
@@ -68,6 +70,7 @@ class AsyncAnnotationChannelServiceTest {
     private final List<ChannelBindingProcessor> channelBindingProcessors = List.of(channelBindingProcessor);
     private final StringValueResolver stringValueResolver = mock(StringValueResolver.class);
     private final AsyncApiDocketService asyncApiDocketService = mock(AsyncApiDocketService.class);
+    private final ChannelNameResolver channelNameResolver = mock(ChannelNameResolver.class);
 
     AsyncAnnotationChannelService<TestListener> asyncAnnotationChannelService = new AsyncAnnotationChannelService<>(
             asyncAnnotationProvider,
@@ -75,13 +78,18 @@ class AsyncAnnotationChannelServiceTest {
             asyncAnnotationMessageService,
             channelBindingProcessors,
             stringValueResolver,
-            asyncApiDocketService);
+            asyncApiDocketService,
+            channelNameResolver);
 
     @BeforeEach
     void setUp() {
         doAnswer(invocation -> invocation.getArgument(0))
                 .when(stringValueResolver)
                 .resolveStringValue(any());
+
+        doAnswer(invocation -> ((AsyncOperation) invocation.getArgument(0)).channelName())
+                .when(channelNameResolver)
+                .resolve(any(), any());
 
         when(channelBindingProcessor.process(any()))
                 .thenReturn(Optional.of(new ProcessedChannelBinding("test-binding", new EmptyChannelBinding())));
